@@ -1,12 +1,3 @@
 #pragma once
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
-int remux();
-
-#ifdef __cplusplus
-}
-#endif
+__declspec(dllexport) int __cdecl remux();

@@ -9,3 +9,13 @@
 *.mp4
 */ipch/
 .vscode/settings.json
+*.lib
+*.pdb
+*.idb
+*.obj
+*.tlog
+*.lastbuildstate
+*.log
+*.ilk
+*.exp
+*.dll
