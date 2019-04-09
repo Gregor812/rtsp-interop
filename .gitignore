@@ -1,0 +1,11 @@
+.vs/
+*/obj/
+*/bin/
+
+# c++ project artefacts
+*.o
+*.so
+*.mkv
+*.mp4
+*/ipch/
+.vscode/settings.json

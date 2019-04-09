@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "process",
+            "command": "dotnet build",
+            "args": [
+                "/p:Platform=x64",
+                "-c Debug"
+            ],
+            "dependsOn": "nativeBuild",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+
+        {
+            "label": "nativeBuild",
+            "type": "process",
+            "command": "make",
+            "args": [
+                "-C ${workspaceRoot}/VideoNativeLibs"
+            ]
+        }
+    ]
+}
