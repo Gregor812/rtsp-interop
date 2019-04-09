@@ -6,10 +6,10 @@
             "type": "process",
             "command": "dotnet build",
             "args": [
-                "/p:Platform=x64",
-                "-c Debug"
+                "-c Debug",
+                "/p:Platform=x64"
             ],
-            "dependsOn": "nativeBuild",
+            "dependsOn": "copyNativeLib",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -17,10 +17,32 @@
         },
 
         {
+            "label": "copyNativeLib",
+            "type": "shell",
+            "command": "cp",
+            "args": [
+                "${workspaceRoot}/VideoNativeLibs/libRtspSlicer.so",
+                "${workspaceRoot}/RtspListener/bin/x64/Debug/netcoreapp2.2/libRtspSlicer.so"
+            ],
+            "dependsOn": "nativeBuild"
+        },
+
+        {
             "label": "nativeBuild",
             "type": "process",
             "command": "make",
             "args": [
+                "-C ${workspaceRoot}/VideoNativeLibs"
+            ],
+            "dependsOn": "nativeClean"
+        },
+
+        {
+            "label": "nativeClean",
+            "type": "process",
+            "command": "make",
+            "args": [
+                "clean",
                 "-C ${workspaceRoot}/VideoNativeLibs"
             ]
         }
