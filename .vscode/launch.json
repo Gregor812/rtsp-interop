@@ -8,18 +8,12 @@
             "name": ".NET Core Launch (console)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "copyNativeLib",
             "program": "${workspaceFolder}/RtspListener/bin/x64/Debug/netcoreapp2.2/RtspListener.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "externalTerminal",
             "stopAtEntry": true
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
         }
     ]
 }

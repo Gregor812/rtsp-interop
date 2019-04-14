@@ -4,19 +4,16 @@ CXX = g++
 SOURCES = remuxing.c streams.cpp
 OBJECTS := $(SOURCES:.cpp=.o)
 OBJECTS := $(OBJECTS:.c=.o)
-LIBS = -lavdevice -lavfilter -lavformat -lavcodec -laom -lavutil \
--lfdk-aac -lm -lmp3lame -lopus -lpostproc -lpthread \
--lswresample -lswscale -lva -lva-drm -lva-x11 -lvdpau \
--lvorbis -lvorbisenc -lvpx -lX11 -lx264 -lx265 -lz
+LIBS = -lavdevice -lavfilter -lavformat -lavcodec -lavutil
 EXECUTABLE = libRtspSlicer.so
 
-COMMON_FLAGS = -g -fPIC -Wall -I./ffmpeg/include -I.
-LDFLAGS = -shared -g -L./ffmpeg/lib $(LIBS)
+COMMON_FLAGS = -g -fPIC -Wall -I.
+LDFLAGS = -shared -g
 
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.cpp
 	$(CXX) $(COMMON_FLAGS) -std=c++11 -c $< -o $@
