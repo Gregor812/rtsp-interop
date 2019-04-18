@@ -5,6 +5,26 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/VideoNativeLibs/RtspSlicer",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/VideoNativeLibs",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "slicerBuild"
+        },
+        {
             "name": ".NET Core Launch (console)",
             "type": "coreclr",
             "request": "launch",
@@ -13,7 +33,7 @@
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "externalTerminal",
-            "stopAtEntry": true
+            "stopAtEntry": false
         }
     ]
 }

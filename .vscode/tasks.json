@@ -47,6 +47,33 @@
                 "-C",
                 "${workspaceRoot}/VideoNativeLibs/"
             ]
-        }
+        },
+
+        {
+            "label": "slicerBuild",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "-C",
+                "${workspaceRoot}/VideoNativeLibs",
+                "-f",
+                "makefile-exe"
+            ],
+            "dependsOn": "slicerClean"
+        },
+
+        {
+            "label": "slicerClean",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "clean",
+                "-C",
+                "${workspaceRoot}/VideoNativeLibs",
+                "-f",
+                "makefile-exe"
+            ],
+            "dependsOn": "nativeBuild"
+        },
     ]
 }

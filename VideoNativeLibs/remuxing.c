@@ -89,9 +89,9 @@ static void close_output_context(AVFormatContext* ofmt_ctx, AVOutputFormat* ofmt
     avformat_free_context(ofmt_ctx);
 }
 
-int remux()
+int remux(Callback callback)
 {
-    printf("We're in the native code now!");
+    printf("We're in the native code now!\n");
     AVOutputFormat *ofmt = NULL;
     AVFormatContext *ofmt_ctx = NULL;
     AVPacket pkt;
@@ -148,7 +148,7 @@ int remux()
 
             pkt.stream_index = streamMapping[pkt.stream_index];
             out_stream = ofmt_ctx->streams[pkt.stream_index];
-            LogPacket(inputFormatContextResult.InputFormatContext, &pkt, "in");
+            //LogPacket(inputFormatContextResult.InputFormatContext, &pkt, "in");
 
             AVRational time_base = inputFormatContextResult.InputFormatContext->streams[pkt.stream_index]->time_base;
             double current_packet_time = av_q2d(time_base) * pkt.pts;
@@ -164,7 +164,7 @@ int remux()
             lastStreamDts[pkt.stream_index] = pkt.dts;
             pkt.duration = av_rescale_q(pkt.duration, in_stream->time_base, out_stream->time_base);
             pkt.pos = -1;
-            LogPacket(ofmt_ctx, &pkt, "out");
+            //LogPacket(ofmt_ctx, &pkt, "out");
 
             ret = av_interleaved_write_frame(ofmt_ctx, &pkt);
             if (ret < 0)
@@ -188,10 +188,11 @@ int remux()
         {
             break;
         }
+        callback();
     }
 end:
 
-    close_output_context(ofmt_ctx, ofmt);
+    //close_output_context(ofmt_ctx, ofmt);
     avformat_close_input(&inputFormatContextResult.InputFormatContext);
 
     av_freep(&streamMapping);
@@ -201,6 +202,8 @@ end:
         fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
         return 1;
     }
+
+    printf("The whole file is splitted\n");
 
     return 0;
 }

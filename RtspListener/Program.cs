@@ -9,9 +9,14 @@ namespace RtspListener
         {
             Console.WriteLine("Managed code");
             Console.WriteLine("Calling native code...");
-            Wrapper.SplitStreamToTheFiles();
+            Wrapper.SplitStreamToTheFiles(Log);
             Console.WriteLine("Returned successfully to the managed code");
             Console.WriteLine("Bye!");
+        }
+
+        static void Log()
+        {
+            Console.WriteLine("File writed!");
         }
     }
 }

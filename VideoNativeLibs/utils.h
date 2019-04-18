@@ -1,5 +1,10 @@
 #pragma once
 
+#ifdef __cplusplus
+extern "C"
+{ 
+#endif
+
 #include <libavformat/avformat.h>
 #include <libavutil/timestamp.h>
 
@@ -14,3 +19,7 @@ static inline void LogPacket(const AVFormatContext *fmt_ctx, const AVPacket *pkt
            av_ts2str(pkt->duration), av_ts2timestr(pkt->duration, time_base),
            pkt->stream_index);
 }
+
+#ifdef __cplusplus
+}
+#endif

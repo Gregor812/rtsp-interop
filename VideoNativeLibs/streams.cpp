@@ -8,20 +8,20 @@ InputFormatContextResult OpenInputStream()
     InputFormatContextResult result;
     result.InputFormatContext = (AVFormatContext *)0;
 
-    printf("Opening file %s...", inputFile);
+    printf("Opening file %s...\n", inputFile);
     result.ErrorCode = avformat_open_input(&(result.InputFormatContext), inputFile, 0, 0);
     if (result.ErrorCode < 0)
     {
-        fprintf(stderr, "Could not open input file '%s'", inputFile);
+        fprintf(stderr, "Could not open input file '%s'\n", inputFile);
         return result;
     }
 
-    printf("File %s successfully opened", inputFile);
+    printf("File %s successfully opened\n", inputFile);
 
     result.ErrorCode = avformat_find_stream_info(result.InputFormatContext, 0);
     if (result.ErrorCode < 0)
     {
-        fprintf(stderr, "Failed to retrieve input stream information");
+        fprintf(stderr, "Failed to retrieve input stream information\n");
         return result;
     }
 

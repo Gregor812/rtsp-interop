@@ -1,18 +1,18 @@
 CC = gcc
 CXX = g++
 
-SOURCES = remuxing.c streams.cpp
+SOURCES = main.cpp
 OBJECTS := $(SOURCES:.cpp=.o)
 OBJECTS := $(OBJECTS:.c=.o)
-LIBS = -lavdevice -lavfilter -lavformat -lavcodec -lavutil
-OUTLIB = libRtspSlicer.so
+LIBS = -lRtspSlicer
+EXECUTABLE = RtspSlicer
 
-COMMON_FLAGS = -g -fPIC -Wall -I.
-LDFLAGS = -shared -g
+COMMON_FLAGS = -g -Wall -I.
+LDFLAGS = -g -L. -Wl,-R -Wl,.
 
-all: $(OUTLIB)
+all: $(EXECUTABLE)
 
-$(OUTLIB): $(OBJECTS)
+$(EXECUTABLE): $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.cpp
@@ -24,4 +24,4 @@ $(OUTLIB): $(OBJECTS)
 .PHONY: clean
 
 clean:
-	rm $(OBJECTS) $(OUTLIB) || exit 0
+	rm $(OBJECTS) $(EXECUTABLE) || exit 0
